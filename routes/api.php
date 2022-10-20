@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(ArticleController::class)->group(function(){
     Route::get('articles', 'list');
+    Route::get('articles/{article}', 'show');
 });
 
 //Route::get('articles', function (){
