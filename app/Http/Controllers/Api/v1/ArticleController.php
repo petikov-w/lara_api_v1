@@ -5,30 +5,21 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MiniArticleResource;
 use App\Models\Post;
+use Illuminate\Support\Facades\Cache;
 
 class ArticleController extends Controller
 {
     public function list(){
-          $contents = Post::query()->get();
-//        $contents = Post::query()
-//            ->select(['id','title'])
-//            ->get();
-//        $contents = Post::all();
-//        $data=[];
-//        foreach ($contents as $content) {
-//            $data[] = [
-//                'id'=>$content->id,
-//                'title'=>$content->title,
-//                'image'=>$content->image
-//            ];
-//        }
-//        return response($data)
-//               ->header('Content-Type','application/json; charset=UTF-8');
-        return response(MiniArticleResource::collection($contents))
+
+        if (Cache::has("posts")) {
+            $posts = Cache::get("posts");
+        } else {
+            $posts = response(MiniArticleResource::collection(Post::query()->get()));
+            Cache::put("posts", $posts);
+        }
+        return $posts
             ->header('Content-Type','application/json; charset=UTF-8');
 
-//        return response($contents)
-//            ->header('Content-Type','application/json; charset=UTF-8');
     }
 
 
