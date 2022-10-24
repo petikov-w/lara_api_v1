@@ -1,4 +1,4 @@
 @extends('templates.main')
-@section('body')
-   <h1>Всем привет!!!</h1>
+@section('main')
+   <h1>Это главная страница!!!</h1>
 @endsection

@@ -6,8 +6,19 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Изучение Laravel</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}" defer></script>
 </head>
 <body>
- @yield('body')
+<header>
+    <div class="container">
+        @include('components.navbar')
+    </div>
+</header>
+<main>
+    <div class="container">
+        @yield('main')
+    </div>
+</main>
 </body>
 </html>
